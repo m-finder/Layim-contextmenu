@@ -4,7 +4,8 @@ layim 模块化右键菜单
 使用方法：
 ----
 * 先引入 contextmenu ，然后 var contextmenu = layui.contextmenu ;
-* ```javascript
+* 调用
+```javascript
 layim.on('ready', function (options) {
         $(".layim-list-friend >li > ul > li").menu({
             menu: [{
