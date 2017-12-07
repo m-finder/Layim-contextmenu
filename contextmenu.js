@@ -11,19 +11,31 @@ layui.define(['layer', 'element'], function (exports) {
             layer.closeAll('tips');
         }, stope = layui.stope;
 
+        var defaults = {
+            menu: [{
+                    text: "菜单一",
+                    callback: function (t) {}
+                }, {
+                    text: "菜单二",
+                    callback: function (t) {}
+                }]
+        };
+
         var othis = function (target, options) {
             //console.log(target),console.log(node),console.log(event),console.log(options);
-
+            options = event.extend(!0, {}, defaults, options);
+            
             $(target).on('contextmenu', function () {
                 //这里拿右键点击元素的相关信息
                 var vthis = $(this);
+                vthis.css('background', 'rgba(0,0,0,.05)').siblings().css('background', '#ffffff');
                 console.log(vthis);
-                
+
                 i = '';
                 layui.each(options.menu, function (index, item) {
                     i += '<li class="ui-context-menu-item"><a href="javascript:void(0);" ><span>' + item.text + '</span></a></li>';
                 });
-                
+
                 html = '<ul id="contextmenu">' + i + '</ul>';
                 layer.tips(html, target, {
                     tips: 1,
@@ -54,7 +66,7 @@ layui.define(['layer', 'element'], function (exports) {
         event.fn.menu = function (options) {
             return new othis(this, options), this;
         };
-        
+
     }(window, document, $);
 
 
