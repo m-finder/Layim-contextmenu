@@ -1,75 +1,42 @@
-layui.define(['layer', 'element'], function (exports) {
+# Layim-contextmenu
+layim 模块化右键菜单
 
-    var $ = layui.jquery
-            , layer = layui.layer
-            , element = layui.element
-            , device = layui.device();
-
-    !function (target, node, event) {
-
-        var hide = function () {
-            layer.closeAll('tips');
-        }, stope = layui.stope;
-
-        var defaults = {
+使用方法：
+----
+* 先引入 contextmenu ，然后 var contextmenu = layui.contextmenu ;
+* 调用
+```javascript
+layim.on('ready', function (options) {
+        $(".layim-list-friend >li > ul > li").menu({
+	    target: function (ele) { // 当前元素
+		    ele.css('background', 'rgba(0,0,0,.05)').siblings().css('background', '#ffffff');
+		    console.log(ele);
+            },
             menu: [{
-                    text: "菜单一",
-                    callback: function (t) {}
-                }, {
-                    text: "菜单二",
-                    callback: function (t) {}
-                }],
-            target: function (t) {}
-        };
-
-        var othis = function (target, options) {
-            //console.log(target),console.log(node),console.log(event),console.log(options);
-            options = event.extend(!0, {}, defaults, options);
-
-
-
-            $(target).on('contextmenu', function () {
-                
-                options.target($(this));
-
-                i = '';
-                layui.each(options.menu, function (index, item) {
-                    i += '<li class="ui-context-menu-item"><a href="javascript:void(0);" ><span>' + item.text + '</span></a></li>';
-                });
-
-                html = '<ul id="contextmenu">' + i + '</ul>';
-                layer.tips(html, target, {
-                    tips: 1,
-                    time: 0,
-                    anim: 5,
-                    fixed: true,
-                    skin: "layui-box layui-layim-contextmenu",
-                    success: function (layero, index) {
-                        var stopmp = function (e) {
-                            stope(e);
-                        };
-                        layero.off('mousedown', stopmp).on('mousedown', stopmp);
+                    text: "新增",
+                    callback: function (target) {
+                        layer.msg(target.find('span').text());
                     }
-                });
-                return false;
-            });
+                }, {
+                    text: "复制",
+                    callback: function (target) {
+                        layer.msg(target.find('span').text());
+                    }
+                }, {
+                    text: "粘贴",
+                    callback: function (target) {
+                        layer.msg(target.find('span').text());
+                    }
+                }, {
+                    text: "删除",
+                    callback: function (target) {
+                        layer.msg(target.find('span').text());
+                    }
+                }
+            ]
+        });
+    });
+```
 
-            $(document).off('mousedown', hide).on('mousedown', hide);
-
-            $(document).on("click", ".ui-context-menu-item", function () {
-                var e = event(this).index();
-                layer.closeAll('tips');
-                options.menu[e].callback && options.menu[e].callback($(this));
-            });
-
-
-        };
-        event.fn.menu = function (options) {
-            return new othis(this, options), this;
-        };
-
-    }(window, document, $);
-
-
-    exports('contextmenu');
-});
+M-finder
+www.m-finder.com
