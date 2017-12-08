@@ -1,42 +1,75 @@
-# Layim-contextmenu
-layim 模块化右键菜单
+layui.define(['layer', 'element'], function (exports) {
 
-使用方法：
-----
-* 先引入 contextmenu ，然后 var contextmenu = layui.contextmenu ;
-* 调用
-```javascript
-layim.on('ready', function (options) {
-        $(".layim-list-friend >li > ul > li").menu({
-	    target: function (ele) { // 当前元素
-		    ele.css('background', 'rgba(0,0,0,.05)').siblings().css('background', '#ffffff');
-		    console.log(ele);
-            },
+    var $ = layui.jquery
+            , layer = layui.layer
+            , element = layui.element
+            , device = layui.device();
+
+    !function (target, node, event) {
+
+        var hide = function () {
+            layer.closeAll('tips');
+        }, stope = layui.stope;
+
+        var defaults = {
             menu: [{
-                    text: "新增",
-                    callback: function () {
-                        alert("新增");
-                    }
+                    text: "菜单一",
+                    callback: function (t) {}
                 }, {
-                    text: "复制",
-                    callback: function () {
-                        alert("复制");
-                    }
-                }, {
-                    text: "粘贴",
-                    callback: function () {
-                        alert("粘贴");
-                    }
-                }, {
-                    text: "删除",
-                    callback: function () {
-                        alert("删除");
-                    }
-                }
-            ]
-        });
-    });
-```
+                    text: "菜单二",
+                    callback: function (t) {}
+                }],
+            target: function (t) {}
+        };
 
-M-finder
-www.m-finder.com
+        var othis = function (target, options) {
+            //console.log(target),console.log(node),console.log(event),console.log(options);
+            options = event.extend(!0, {}, defaults, options);
+
+
+
+            $(target).on('contextmenu', function () {
+                
+                options.target($(this));
+
+                i = '';
+                layui.each(options.menu, function (index, item) {
+                    i += '<li class="ui-context-menu-item"><a href="javascript:void(0);" ><span>' + item.text + '</span></a></li>';
+                });
+
+                html = '<ul id="contextmenu">' + i + '</ul>';
+                layer.tips(html, target, {
+                    tips: 1,
+                    time: 0,
+                    anim: 5,
+                    fixed: true,
+                    skin: "layui-box layui-layim-contextmenu",
+                    success: function (layero, index) {
+                        var stopmp = function (e) {
+                            stope(e);
+                        };
+                        layero.off('mousedown', stopmp).on('mousedown', stopmp);
+                    }
+                });
+                return false;
+            });
+
+            $(document).off('mousedown', hide).on('mousedown', hide);
+
+            $(document).on("click", ".ui-context-menu-item", function () {
+                var e = event(this).index();
+                layer.closeAll('tips');
+                options.menu[e].callback && options.menu[e].callback($(this));
+            });
+
+
+        };
+        event.fn.menu = function (options) {
+            return new othis(this, options), this;
+        };
+
+    }(window, document, $);
+
+
+    exports('contextmenu');
+});
