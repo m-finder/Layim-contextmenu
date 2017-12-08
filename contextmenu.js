@@ -56,10 +56,10 @@ layui.define(['layer', 'element'], function (exports) {
 
             $(document).off('mousedown', hide).on('mousedown', hide);
 
-            $(document).on("click", ".ui-context-menu-item", function (t) {
+            $(document).on("click", ".ui-context-menu-item", function () {
                 var e = event(this).index();
                 layer.closeAll('tips');
-                options.menu[e].callback && options.menu[e].callback();
+                options.menu[e].callback && options.menu[e].callback($(this));
             });
 
 
