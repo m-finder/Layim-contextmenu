@@ -14,24 +14,28 @@ layim.on('ready', function (options) {
             },
             menu: [{
                     text: "新增",
-                    callback: function (target) {
-                        layer.msg(target.find('span').text());
-                    }
+                    callback: function (target,ele) {
+			    console.log(target);
+			    layer.msg(ele.find('span').text());
+		    }
                 }, {
                     text: "复制",
-                    callback: function (target) {
-                        layer.msg(target.find('span').text());
-                    }
+                    callback: function (target,ele) {
+			    console.log(target);
+			    layer.msg(ele.find('span').text());
+		    }
                 }, {
                     text: "粘贴",
-                    callback: function (target) {
-                        layer.msg(target.find('span').text());
-                    }
+                    callback: function (target,ele) {
+			    console.log(target);
+			    layer.msg(ele.find('span').text());
+		    }
                 }, {
                     text: "删除",
-                    callback: function (target) {
-                        layer.msg(target.find('span').text());
-                    }
+                    callback: function (target,ele) {
+			    console.log(target);
+			    layer.msg(ele.find('span').text());
+		    }
                 }
             ]
         });
