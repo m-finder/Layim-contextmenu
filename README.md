@@ -8,6 +8,10 @@ layim 模块化右键菜单
 ```javascript
 layim.on('ready', function (options) {
         $(".layim-list-friend >li > ul > li").menu({
+			target: function (ele) { // 当前元素
+					ele.css('background', 'rgba(0,0,0,.05)').siblings().css('background', '#ffffff');
+					console.log(ele);
+            },
             menu: [{
                     text: "新增",
                     callback: function () {
