@@ -1,45 +1,47 @@
-# Layim-contextmenu
+# layim-contextmenu
 layim 模块化右键菜单
+----
+#### 更新记录
+* 2019-09-28
+	* 代码优化
+	* 可一次性渲染多个右键菜单
+	* 修复已知 bug
+* 2017-10-8
+	* 第一版
 
+演示地址: [【 点我 】](https://www.m-finder.com/im)
 使用方法：
 ----
-* 先引入 contextmenu ，然后 var contextmenu = layui.contextmenu ;
+* 先引入 contextmenu ，然后 var menu = layui.contextmenu ;
 * 调用
 ```javascript
 layim.on('ready', function (options) {
-        $(".layim-list-friend >li > ul > li").menu({
-	    target: function (ele) { // 当前元素
-		    ele.css('background', 'rgba(0,0,0,.05)').siblings().css('background', '#ffffff');
-		    console.log(ele);
-            },
-            menu: [{
-                    text: "新增",
-                    callback: function (target,ele) {
-			    console.log(target);
-			    layer.msg(ele.find('span').text());
-		    }
-                }, {
-                    text: "复制",
-                    callback: function (target,ele) {
-			    console.log(target);
-			    layer.msg(ele.find('span').text());
-		    }
-                }, {
-                    text: "粘贴",
-                    callback: function (target,ele) {
-			    console.log(target);
-			    layer.msg(ele.find('span').text());
-		    }
-                }, {
-                    text: "删除",
-                    callback: function (target,ele) {
-			    console.log(target);
-			    layer.msg(ele.find('span').text());
-		    }
-                }
-            ]
-        });
-    });
+        menu.init([
+			{
+				target: '.layim-list-friend',
+				menu: [{
+					text: "新增分组",
+					callback: function (target) {
+						layer.msg(target.find('span').text());
+					}
+				}]
+			},
+			{
+				target: '.layim-list-friend >li>h5>span',
+				menu: [{
+					text: "重命名",
+					callback: function (target) {
+						layer.msg(target.find('span').text());
+					}
+				}, {
+					text: "删除分组",
+					callback: function (target) {
+						layer.msg(target.find('span').text());
+					}
+				}]
+			}
+		]);
+});
 ```
 
 M-finder
