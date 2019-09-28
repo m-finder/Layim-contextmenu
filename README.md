@@ -1,6 +1,6 @@
-# layim-contextmenu
-layim 模块化右键菜单
+layim-contextmenu layim 右键菜单
 ----
+
 #### 更新记录
 * 2019-09-28
 	* 代码优化
@@ -10,7 +10,9 @@ layim 模块化右键菜单
 	* 第一版
 
 演示地址: [【 点我 】](https://www.m-finder.com/im)
-使用方法：
+
+
+#### 使用方法：
 ----
 * 先引入 contextmenu ，然后 var menu = layui.contextmenu ;
 * 调用
