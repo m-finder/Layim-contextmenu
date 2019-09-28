@@ -1,5 +1,8 @@
 layim-contextmenu layim 右键菜单
 ----
+#### 演示地址: 
+[【 点我 】](https://www.m-finder.com/im)
+
 
 #### 更新记录
 * 2019-09-28
@@ -9,7 +12,7 @@ layim-contextmenu layim 右键菜单
 * 2017-10-8
 	* 第一版
 
-演示地址: [【 点我 】](https://www.m-finder.com/im)
+
 
 
 #### 使用方法：
