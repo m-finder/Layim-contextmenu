@@ -8,32 +8,31 @@ layim-contextmenu layim 右键菜单
 * 先引入 contextmenu ，然后 var menu = layui.contextmenu ;
 * 调用
 ```javascript
-layim.on('ready', function (options) {
-        menu.init([
-			{
-				target: '.layim-list-friend',
-				menu: [{
-					text: "新增分组",
-					callback: function (target) {
-						layer.msg(target.find('span').text());
-					}
-				}]
-			},
-			{
-				target: '.layim-list-friend >li>h5>span',
-				menu: [{
-					text: "重命名",
-					callback: function (target) {
-						layer.msg(target.find('span').text());
-					}
-				}, {
-					text: "删除分组",
-					callback: function (target) {
-						layer.msg(target.find('span').text());
-					}
-				}]
-			}
-		]);
+layim.on('ready', function(options) {
+    menu.init([{
+        target: '.layim-list-friend',
+        menu: [{
+            text: "新增分组",
+            callback: function(target) {
+                layer.msg(target.find('span').text());
+            }
+        }]
+    },
+    {
+        target: '.layim-list-friend >li>h5>span',
+        menu: [{
+            text: "重命名",
+            callback: function(target) {
+                layer.msg(target.find('span').text());
+            }
+        },
+        {
+            text: "删除分组",
+            callback: function(target) {
+                layer.msg(target.find('span').text());
+            }
+        }]
+    }]);
 });
 ```
 
